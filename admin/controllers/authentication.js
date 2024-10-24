@@ -18,7 +18,7 @@ var signinUser = async (req, res) => {
 	    body: req.body,
 	    json: true
 	};
- 
+	console.log(query);
 	var response = await request(query).then(results => results).catch(err => err);
 	if(response.status == "success"){
 		// sign JWT
@@ -31,6 +31,7 @@ var signinUser = async (req, res) => {
 		response.token = token;
 	}
 	res.status(200).json(response);
+	console.log(response);
 }
 
 var signupUser = async (req, res) => {

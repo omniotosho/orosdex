@@ -1,4 +1,4 @@
-const endpoint = `http://localhost:8400`;
+const endpoint = `http://localhost/api`;
 
 var genders_collections = [
 	{

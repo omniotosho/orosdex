@@ -1278,4 +1278,6 @@ def add_new_treasury():
 
 # start app
 app.debug = True
-app.run(port=8400)
+if __name__ == "__main__":
+    # resulting into starting the api 2ce 
+    app.run(port=5050)

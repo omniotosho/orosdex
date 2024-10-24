@@ -1,7 +1,16 @@
 require('dotenv').config();
+
+const config = {
+	flaskApiUrl: process.env.FLASK_API_URL || 'http://localhost/api',
+	flaskApiInternalUrl: process.env.FLASK_API_INTERNAL_URL || 'http://localhost/api',
+	flaskApiExternalUrl: process.env.FLASK_API_EXTERNAL_URL || 'http://localhost/api',
+  };
+
+module.exports = config;
+
 const http = require('http');
 const app  = require('../app');
-const port = parseInt(process.env.PORT) || 3200;
+const port = parseInt(process.env.PORT) || 3000;
 const host = process.env.HOST || "localhost";
 
 // The express app we just created
