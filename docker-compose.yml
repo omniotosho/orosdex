@@ -1,0 +1,48 @@
+services:
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - APP_NAME=OrosDex
+      - NODE_ENV=development
+      - HOST=localhost
+      - PORT=3000
+      - API_ENDPOINT=http://api-be:5050
+      - FLASK_API_URL=http://localhost/api
+      - FLASK_API_INTERNAL_URL=http://localhost/api
+      # For local development, you can also access the Flask API via:
+      - FLASK_API_EXTERNAL_URL=http://localhost/api
+    volumes:
+      - ./admin:/admin
+      - /admin/node_modules
+    depends_on:
+      - api-be
+
+  api-be:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "5050:5050"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+    volumes:
+      - ./api:/api
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - admin
+      - api-be
+
+networks:
+  default:
+    name: app-network
