@@ -1,3 +1,4 @@
 */.idea/
 */se.db
 */instance/se.db
+/admin/.env.example
